@@ -43,77 +43,100 @@ public class blackJackNew
 						System.out.println("Wrong input, please enter Hit or Stand.");
 						i += -1;
 					}
-					else if (input.equals("hit"))
+					else 
 					{
-						//give dealer random card
-						dealerCardTotal += rand.nextInt(12) + 1;
-
-						if (dealtCard == 0 && playerCardTotal <= 10)
-						{
-							hand[i] = cardType[dealtCard];
-							playerCardTotal += 11;
-							System.out.println("Hit!\n\"You drew an Ace worth eleven cards!\n" + "Card Total: " + playerCardTotal);
-						}
-						else if (dealtCard == 0 && playerCardTotal > 10)
-						{
-							hand[i] = cardType[dealtCard];
-							playerCardTotal += 1;
-							System.out.println("Hit!\n\"You drew an Ace worth one card!\n" + "Card Total: " + playerCardTotal);
-						}
-						else if ( dealtCard != 0 )
-						{
-							System.out.println("Hit");
-							playerCardTotal += dealtCard + 1;
-							hand[i] = cardType[dealtCard];
-							System.out.println("You drew a " + cardType[dealtCard] + " of " + cardSuit + "!\n" + "Card Total is: " + playerCardTotal);
-						}
-					}
-					else if (input.equals ("stand"))
-					{
-						//Print Input
-						System.out.println("stand");
-						//give dealer random card
-						dealerCardTotal += rand.nextInt(12) + 1;
-						//Test Dealer's cards
-						if ( dealerCardTotal > 21 ) 
-						{ 
-							System.out.println("Dealer busted!" + "\nYou Win!"); 
-							totalCash += playerBet; 
-							break;
-						}
-						else if ( dealerCardTotal >= playerCardTotal ) 
-						{ 
-							System.out.println("Dealer's card count is " +  dealerCardTotal + "!\n" + "You Lose!"); 
-							totalCash -= playerBet; 
-							break;
-						}
-						else if ( playerCardTotal >= dealerCardTotal ) 
-						{ 
-							System.out.println("Dealer's card count is " +  dealerCardTotal + "!\n" + "You Win!"); 
-							totalCash += playerBet; 
-							break;
-						}	
-						else if ( dealerCardTotal == 21 ) 
-						{ 
-							System.out.println("Dealer Wins!");  
-							totalCash -= playerBet; 
-							break;
-						}
-					}
-					else if (input.equals("help"))
-					{
-						System.out.println("stand");
-						for( j = 0; j < i+1; j++)
-						{
-							if (!hand[j].equals(""))
-							{
-								System.out.println("Card at position " + j + " is a " + hand[j]);
-								i += -1;
-							}
-						}
+						inputCheck( input );
 					}
 				}
 			}
 		}
 	}
+	
+	public static String inputCheck( stringInput )
+	{
+		if (input.equals("help"))
+		{
+			helpFunction();
+		}
+		if (input.equals("stand"))
+		{
+			standFunction();
+		}
+		if (input.equals("hit"))
+		{
+			hitFunction();
+		}
+	}
+	
+	public static void helpFunction()
+	{
+		System.out.println("stand");
+		for( j = 0; j < i+1; j++)
+		{
+			if (!hand[j].equals(""))
+			{
+				System.out.println("Card at position " + j + " is a " + hand[j]);
+				i += -1;
+			}
+		}
+	}
+	
+	public static void hitFunction()
+	{
+		//give dealer random card
+		dealerCardTotal += rand.nextInt(12) + 1;
+
+		if (dealtCard == 0 && playerCardTotal <= 10)
+		{
+			hand[i] = cardType[dealtCard];
+			playerCardTotal += 11;
+			System.out.println("Hit!\n\"You drew an Ace worth eleven cards!\n" + "Card Total: " + playerCardTotal);
+		}
+		else if (dealtCard == 0 && playerCardTotal > 10)
+		{
+			hand[i] = cardType[dealtCard];
+			playerCardTotal += 1;
+			System.out.println("Hit!\n\"You drew an Ace worth one card!\n" + "Card Total: " + playerCardTotal);
+		}
+		else if ( dealtCard != 0 )
+		{
+			System.out.println("Hit");
+			playerCardTotal += dealtCard + 1;
+			hand[i] = cardType[dealtCard];
+			System.out.println("You drew a " + cardType[dealtCard] + " of " + cardSuit + "!\n" + "Card Total is: " + playerCardTotal);
+		}
+	}
+	
+	public static standFunction()
+	{
+		//Print Input
+		System.out.println("stand");
+		//give dealer random card
+		dealerCardTotal += rand.nextInt(12) + 1;
+		//Test Dealer's cards
+		if ( dealerCardTotal > 21 ) 
+		{ 
+			System.out.println("Dealer busted!" + "\nYou Win!"); 
+			totalCash += playerBet; 
+			break;
+		}
+		else if ( dealerCardTotal >= playerCardTotal ) 
+		{ 
+			System.out.println("Dealer's card count is " +  dealerCardTotal + "!\n" + "You Lose!"); 
+			totalCash -= playerBet; 
+			break;
+		}
+		else if ( playerCardTotal >= dealerCardTotal ) 
+		{ 
+			System.out.println("Dealer's card count is " +  dealerCardTotal + "!\n" + "You Win!"); 
+			totalCash += playerBet; 
+			break;
+		}	
+		else if ( dealerCardTotal == 21 ) 
+		{ 
+			System.out.println("Dealer Wins!");  
+			totalCash -= playerBet; 
+			break;
+		}
+		}
 }
